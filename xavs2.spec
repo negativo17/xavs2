@@ -7,11 +7,6 @@ License:    GPLv2
 
 Source0:    https://github.com/pkuvcl/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-%if 0%{?rhel} == 7
-BuildRequires:  prelink
-%else
-BuildRequires:  execstack
-%endif
 BuildRequires:  gcc
 BuildRequires:  yasm
 
@@ -52,7 +47,6 @@ cd build/linux
 # Remove hardcoded CFLAGS on generated file containing variables
 sed -i \
     -e 's|CFLAGS=.*%{optflags}|CFLAGS=%{optflags}|g' \
-    -e 's|-mpreferred-stack-boundary=5 ||g' \
     config.mak
 
 %make_build
@@ -60,9 +54,6 @@ sed -i \
 %install
 cd build/linux
 %make_install
-execstack -c \
-    %{buildroot}%{_libdir}/lib%{name}.so.* \
-    %{buildroot}%{_bindir}/%{name}
 
 find %{buildroot} -name "*a" -delete
 
