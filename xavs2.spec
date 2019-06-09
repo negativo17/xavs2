@@ -7,7 +7,11 @@ License:    GPLv2
 
 Source0:    https://github.com/pkuvcl/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-#BuildRequires:  execstack
+%if 0%{?rhel} == 7
+BuildRequires:  prelink
+%else
+BuildRequires:  execstack
+%endif
 BuildRequires:  gcc
 BuildRequires:  yasm
 
