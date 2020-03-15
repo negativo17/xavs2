@@ -41,7 +41,11 @@ davs2 is an open-source encoder of AVS2-P2/IEEE1857.4 video coding standard.
 This package contains the shared library development files.
 
 %prep
-%autosetup %{?shortcommit0:-n %{name}-%{commit0}}
+%if %{?shortcommit0}
+%autosetup -n %{name}-%{commit0}
+%else
+%autosetup
+%endif
 
 %build
 cd build/linux
