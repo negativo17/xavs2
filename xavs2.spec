@@ -1,10 +1,10 @@
-%global commit0 f45c3407374ec8b8df221a049c42b3415ac8d3bb
-%global date 20181229
+%global commit0 eae1e8b9d12468059bdd7dee893508e470fa83d8
+%global date 20190422
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name:       xavs2
 Version:    1.3
-Release:    2%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:    3%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:    An open-source encoder of AVS2-P2/IEEE1857.4 video coding standard
 URL:        https://github.com/pkuvcl/%{name}
 License:    GPLv2
@@ -82,6 +82,9 @@ find %{buildroot} -name "*a" -delete
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sun Mar 15 2020 Simone Caronni <negativo17@gmail.com> - 1.3-3.20190422giteae1e8b
+- Update to latest snapshot.
+
 * Sun Jun 09 2019 Simone Caronni <negativo17@gmail.com> - 1.3-2.20181229gitf45c340
 - Update to latest snapshot to fix various bugs.
 
