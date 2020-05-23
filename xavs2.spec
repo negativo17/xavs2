@@ -4,7 +4,7 @@
 
 Name:       xavs2
 Version:    1.3
-Release:    3%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:    4%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:    An open-source encoder of AVS2-P2/IEEE1857.4 video coding standard
 URL:        https://github.com/pkuvcl/%{name}
 License:    GPLv2
@@ -16,7 +16,9 @@ Source0:    https://github.com/pkuvcl/%{name}/archive/%{version}.tar.gz#/%{name}
 %endif
 
 BuildRequires:  gcc
+%ifarch x86_64
 BuildRequires:  nasm >= 2.13
+%endif
 
 %description
 xavs2 is an open-source encoder of AVS2-P2/IEEE1857.4 video coding standard.
@@ -52,6 +54,9 @@ cd build/linux
 %configure \
     --bit-depth='8' \
     --chroma-format='all' \
+%ifarch aarch64
+    --disable-asm \
+%endif
     --disable-static \
     --enable-pic \
     --enable-shared
@@ -86,6 +91,9 @@ find %{buildroot} -name "*a" -delete
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sat May 23 2020 Simone Caronni <negativo17@gmail.com> - 1.3-4.20190422giteae1e8b
+- Disable ASM for aarch64.
+
 * Sun Mar 15 2020 Simone Caronni <negativo17@gmail.com> - 1.3-3.20190422giteae1e8b
 - Update to latest snapshot.
 
