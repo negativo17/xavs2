@@ -9,7 +9,7 @@ Summary:    An open-source encoder of AVS2-P2/IEEE1857.4 video coding standard
 URL:        https://github.com/pkuvcl/%{name}
 License:    GPLv2
 
-%if %{?shortcommit0}
+%if "%{?shortcommit0}"
 Source0:    https://github.com/pkuvcl/%{name}/archive/%{commit0}/%{name}-%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 %else
 Source0:    https://github.com/pkuvcl/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
@@ -43,7 +43,7 @@ davs2 is an open-source encoder of AVS2-P2/IEEE1857.4 video coding standard.
 This package contains the shared library development files.
 
 %prep
-%if %{?shortcommit0}
+%if "%{?shortcommit0}"
 %autosetup -n %{name}-%{commit0}
 %else
 %autosetup
