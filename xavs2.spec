@@ -4,7 +4,7 @@
 
 Name:       xavs2
 Version:    1.3
-Release:    4%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Release:    5%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
 Summary:    An open-source encoder of AVS2-P2/IEEE1857.4 video coding standard
 URL:        https://github.com/pkuvcl/%{name}
 License:    GPLv2
@@ -46,11 +46,12 @@ This package contains the shared library development files.
 %if "%{?shortcommit0}"
 %autosetup -n %{name}-%{commit0}
 %else
-%autosetup
+%autosetup 
 %endif
 
 %build
 cd build/linux
+export CFLAGS="%{optflags} -Wno-incompatible-pointer-types"
 %configure \
     --bit-depth='8' \
     --chroma-format='all' \
@@ -91,6 +92,9 @@ find %{buildroot} -name "*a" -delete
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Mar 21 2024 Simone Caronni <negativo17@gmail.com> - 1.3-5.20190422giteae1e8b
+- Fix build on Fedora 40.
+
 * Sat May 23 2020 Simone Caronni <negativo17@gmail.com> - 1.3-4.20190422giteae1e8b
 - Disable ASM for aarch64.
 
