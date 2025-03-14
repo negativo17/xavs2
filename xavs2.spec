@@ -1,19 +1,11 @@
-%global commit0 eae1e8b9d12468059bdd7dee893508e470fa83d8
-%global date 20190422
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:       xavs2
-Version:    1.3
-Release:    5%{?shortcommit0:.%{date}git%{shortcommit0}}%{?dist}
+Version:    1.4
+Release:    1%{?dist}
 Summary:    An open-source encoder of AVS2-P2/IEEE1857.4 video coding standard
 URL:        https://github.com/pkuvcl/%{name}
 License:    GPLv2
 
-%if "%{?shortcommit0}"
-Source0:    https://github.com/pkuvcl/%{name}/archive/%{commit0}/%{name}-%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-%else
 Source0:    https://github.com/pkuvcl/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-%endif
 
 BuildRequires:  gcc
 %ifarch x86_64
@@ -43,11 +35,7 @@ davs2 is an open-source encoder of AVS2-P2/IEEE1857.4 video coding standard.
 This package contains the shared library development files.
 
 %prep
-%if "%{?shortcommit0}"
-%autosetup -n %{name}-%{commit0}
-%else
 %autosetup 
-%endif
 
 %build
 cd build/linux
@@ -92,6 +80,9 @@ find %{buildroot} -name "*a" -delete
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Fri Mar 14 2025 Simone Caronni <negativo17@gmail.com> - 1.4-1
+- Update to 1.4 final.
+
 * Thu Mar 21 2024 Simone Caronni <negativo17@gmail.com> - 1.3-5.20190422giteae1e8b
 - Fix build on Fedora 40.
 
