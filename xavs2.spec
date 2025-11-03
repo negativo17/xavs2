@@ -1,6 +1,6 @@
 Name:       xavs2
 Version:    1.4
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    An open-source encoder of AVS2-P2/IEEE1857.4 video coding standard
 URL:        https://github.com/pkuvcl/%{name}
 License:    GPLv2
@@ -43,7 +43,9 @@ export CFLAGS="%{optflags} -Wno-incompatible-pointer-types"
 %configure \
     --bit-depth='8' \
     --chroma-format='all' \
-%ifarch aarch64
+%ifarch x86_64
+    --enable-asm \
+%else
     --disable-asm \
 %endif
     --disable-static \
@@ -80,6 +82,9 @@ find %{buildroot} -name "*a" -delete
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Mon Nov 03 2025 Simone Caronni <negativo17@gmail.com> - 1.4-2
+- Update conditions for i386 build.
+
 * Fri Mar 14 2025 Simone Caronni <negativo17@gmail.com> - 1.4-1
 - Update to 1.4 final.
 
